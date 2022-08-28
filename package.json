@@ -1,10 +1,10 @@
 {
-  "name": "understanding-typescript",
+  "name": "disney-streaming-take-home",
   "version": "1.0.0",
-  "description": "Understanding TypeScript Course Setup",
+  "description": "Disney Streaming Take Home Assignment",
   "main": "app.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack serve --hot",
     "build": "webpack --config webpack.config.prod.js"
   },
   "keywords": [],
@@ -12,11 +12,17 @@
   "license": "ISC",
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
     "lite-server": "^2.5.4",
-    "ts-loader": "^6.2.1",
+    "mini-css-extract-plugin": "^2.6.1",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.3.1",
     "typescript": "^3.7.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.10.0"
   }
 }
