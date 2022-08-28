@@ -1,3 +1,11 @@
 import './styles/index.scss';
 
-console.log("Hello");
+import { CollectionService } from './CollectionService'
+
+console.log('Hello');
+
+new CollectionService()
+    .getCollectionByName('home')
+    .then(res => {
+        console.log(res);
+    });

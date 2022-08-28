@@ -1,4 +1,7 @@
-*.code-workspace
 node_modules
 dist
+
+*.code-workspace
+.idea
+
 .DS_Store

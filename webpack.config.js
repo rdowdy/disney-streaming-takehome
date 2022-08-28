@@ -44,7 +44,11 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    modules: ['./src', 'node_modules'],
+    extensions: ['.ts', '.js'],
+    alias: {
+      assets: './src/images',
+    },
   },
   plugins: [
     new CleanWebpackPlugin(),
