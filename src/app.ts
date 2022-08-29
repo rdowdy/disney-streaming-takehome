@@ -1,9 +1,18 @@
 import './styles/index.scss';
+import 'reflect-metadata';
 
-import { CollectionService } from './CollectionService'
+import {CollectionService} from './CollectionService'
 
-new CollectionService()
-    .getCollectionByName('home')
-    .then(res => {
-        console.log(res);
-    });
+function StartUp(): void {
+    new CollectionService()
+        .getCollectionByName('home')
+        .then(res => {
+            console.log(res);
+            res.containers.forEach(container => {
+                console.log(container);
+                console.log(container.set.isSetRef());
+            })
+        });
+}
+
+window.addEventListener("load", StartUp);

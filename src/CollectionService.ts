@@ -1,4 +1,5 @@
 import axios from "axios";
+import {plainToInstance, Type} from "class-transformer";
 
 export class CollectionService {
     readonly CollectionApiBaseUrl: string = 'https://cd-static.bamgrid.com/dp-117731241344';
@@ -6,27 +7,27 @@ export class CollectionService {
     async getCollectionByName(name: string): Promise<StandardCollection> {
         let apiUrl = `${this.CollectionApiBaseUrl}/${name}.json`;
         return axios.get(apiUrl).then(res => {
-            return res.data.data.StandardCollection;
+            return plainToInstance(StandardCollection, res.data.data.StandardCollection)
         });
     }
 }
 
-// Container types: ShelfContainer, BecauseYouSet, TrendingSet
-
-// Containers contain sets
-// Set types: CuratedSet, SetRef
-
-// Sets contain items
-// Item types: DmcSeries, DmcVideo, CollectionRef
-
-// Reused types
-
-export interface StandardCollection {
+export class StandardCollection {
+    @Type(() => Container)
     containers: Container[];
+
+    constructor() {
+        this.containers = [];
+    }
 }
 
-export interface Container {
+export class Container {
+    @Type(() => ContentSet)
     set: ContentSet;
+
+    constructor() {
+        this.set = new ContentSet();
+    }
 }
 
 export class ContentSet {
@@ -36,6 +37,10 @@ export class ContentSet {
     constructor() {
         this.text = {};
         this.type = "";
+    }
+
+    isSetRef(): boolean {
+        return this.type === "SetRef";
     }
 }
 export class CuratedSet extends ContentSet {
