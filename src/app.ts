@@ -10,7 +10,6 @@ function StartUp(): void {
             console.log(res);
             res.containers.forEach(container => {
                 console.log(container);
-                console.log(container.set.isSetRef());
             })
         });
 }
