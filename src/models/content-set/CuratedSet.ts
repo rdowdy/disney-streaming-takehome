@@ -1,6 +1,6 @@
 import {Type} from "class-transformer";
 import {ContentSet} from "./ContentSet";
-import {StandardCollectionRef} from "../collection/StandardCollectionRef";
+import {StandardCollectionRef} from "../content-item/StandardCollectionRef";
 import {ContentItem} from "../content-item/ContentItem";
 import {DmcSeries} from "../content-item/DmcSeries";
 import {DmcVideo} from "../content-item/DmcVideo";
@@ -21,5 +21,9 @@ export class CuratedSet extends ContentSet {
     constructor() {
         super();
         this.items = [];
+    }
+
+    getItems(): ContentItem[] {
+        return this.items;
     }
 }

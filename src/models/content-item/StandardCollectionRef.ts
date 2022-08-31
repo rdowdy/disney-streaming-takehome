@@ -1,14 +1,14 @@
 import {ContentItem} from "./ContentItem";
 import {Type} from "class-transformer";
-import {ProgramImage} from "../image/ProgramImage";
+import {CollectionImage} from "../image/CollectionImage";
 
-export class DmcVideo extends ContentItem {
-    @Type(() => ProgramImage)
-    image: ProgramImage;
+export class StandardCollectionRef extends ContentItem {
+    @Type(() => CollectionImage)
+    image: CollectionImage;
 
     constructor() {
         super();
-        this.image = new ProgramImage();
+        this.image = new CollectionImage();
     }
 
     getImageUrl(aspectRatio: string): string {
