@@ -1,5 +1,25 @@
 $bg-color: #000;
+$collection-header-color: #fff;
 
 body {
+    font-family: 'Nunito', sans-serif;
     background-color: $bg-color;
+    padding-left: 30px;
+}
+
+h1 {
+    letter-spacing: 2px;
+    font-size: 1.4em;
+    color: $collection-header-color;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.image-set {
+   display: flex;
+}
+
+.image-set img {
+    width: 250px;
+    margin-right: 25px;
 }

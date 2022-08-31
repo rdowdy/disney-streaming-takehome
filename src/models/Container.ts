@@ -18,4 +18,8 @@ export class Container {
     constructor() {
         this.set = new ContentSet();
     }
+
+    getHeaderText(): string {
+        return this.set.text.title.full.set.default.content;
+    }
 }
