@@ -8,7 +8,6 @@ export class CollectionService {
     async getCollectionByName(name: string): Promise<StandardCollection> {
         let apiUrl = `${this.CollectionApiBaseUrl}/${name}.json`;
         return axios.get(apiUrl).then(res => {
-            console.log(res);
             return plainToInstance(StandardCollection, res.data.data.StandardCollection)
         });
     }
