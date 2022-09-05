@@ -15,11 +15,11 @@ export class HomePage {
 
     renderCollection(collection: StandardCollection): void {
         collection.containers.forEach((container, index) => {
-            this.appendContainerHeader(this.rootEl, container)
-            this.appendContentSet(this.rootEl, container.set, index);
+            let section = document.createElement("section");
+            this.appendContainerHeader(section, container);
+            this.appendContentSet(section, container.set, index);
+            this.rootEl.appendChild(section);
         });
-
-        console.log(this.grid);
 
         this.grid.registerGridEventHandlers();
         this.grid.focus(0, 0);
@@ -32,9 +32,11 @@ export class HomePage {
     }
 
     private appendContentSet(parentEl: HTMLElement, set: ContentSet, index: number): void {
-        let imageSetContainer = window.document.createElement("div");
+        let imageSetContainer = window.document.createElement("ul");
         set.getItems().forEach(item => {
-            this.appendContentItem(imageSetContainer, item, index);
+            let li = document.createElement("li");
+            this.appendContentItem(li, item, index);
+            imageSetContainer.appendChild(li);
         });
         imageSetContainer.classList.add("image-set");
         parentEl.appendChild(imageSetContainer);
