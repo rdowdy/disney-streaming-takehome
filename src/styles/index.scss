@@ -28,12 +28,17 @@ ul.image-set {
     display: flex;
     list-style: none;
     overflow: auto;
-    padding: 20px 0 30px 0;
+    padding: 20px 20px 30px 20px;
     margin: 0;
+    scroll-behavior: smooth;
+
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: 20px;
 }
 
 ul.image-set li {
     padding: 0 10px;
+    scroll-snap-align: start;
 }
 
 .image-set li img {
@@ -47,5 +52,6 @@ ul.image-set li {
     &:focus {
         border: 4px solid white;
         transform: scale(1.1);
+        outline: none;
     }
 }

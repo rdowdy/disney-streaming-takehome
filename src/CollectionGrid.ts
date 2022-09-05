@@ -1,65 +1,91 @@
 export class CollectionGrid {
-    readonly grid: GridItem[][];
-    focusedElement: Coordinate;
+    readonly grid: GridRow[];
+    rovingRowIndex = 0;
 
     constructor() {
-        this.grid = [[]];
-        this.focusedElement = new Coordinate(0, 0);
+        this.grid = [new GridRow([])];
     }
 
     appendElementToRow(row: number, element: HTMLElement): void {
         if (this.grid[row] === undefined) {
-            this.grid[row] = [];
+            this.grid[row] = new GridRow([]);
         }
 
-        this.grid[row].push(new GridItem(element));
+        this.grid[row].items.push(new GridItem(element));
     }
 
     registerGridEventHandlers(): void {
-        const directionMap: {[key: string]: Coordinate} = {
-            "ArrowUp": new Coordinate(0, -1),
-            "ArrowDown": new Coordinate(0, 1),
-            "ArrowLeft": new Coordinate(-1, 0),
-            "ArrowRight": new Coordinate(1, 0)
-        };
-
         window.addEventListener("keydown", (ev: KeyboardEvent) => {
-            if (directionMap[ev.key]) {
-                ev.preventDefault();
-                const direction = directionMap[ev.key];
-                this.focus(
-                    direction.x + this.focusedElement.x,
-                    direction.y + this.focusedElement.y
-                );
+            switch(ev.key) {
+                case "ArrowDown":
+                    ev.preventDefault();
+                    this.focusNextRow();
+                    break;
+                case "ArrowUp":
+                    ev.preventDefault();
+                    this.focusPreviousRow();
+                    break;
+                case "ArrowLeft":
+                    ev.preventDefault();
+                    this.focusPreviousItem();
+                    break;
+                case "ArrowRight":
+                    ev.preventDefault();
+                    this.focusNextItem();
+                    break;
             }
         })
     }
 
-    focus(x: number, y: number): void {
-        if (y < 0) {
-            y = this.grid.length - 1;
+    focusNextRow(): void {
+        this.rovingRowIndex++;
+
+        if (this.rovingRowIndex >= this.grid.length) {
+            this.rovingRowIndex = 0;
         }
 
-        if (y >= this.grid.length) {
-            y = 0;
+        this.focus();
+    }
+
+    focusPreviousRow(): void {
+        this.rovingRowIndex--;
+
+        if (this.rovingRowIndex < 0) {
+            this.rovingRowIndex = this.grid.length - 1;
         }
 
-        if (x < 0) {
-            x = this.grid[y].length - 1;
+        this.focus();
+    }
+
+    focusNextItem(): void {
+        const row = this.grid[this.rovingRowIndex];
+        row.rovingItemIndex++;
+
+        if (row.rovingItemIndex >= row.items.length) {
+            row.rovingItemIndex = 0;
         }
 
-        if (x >= this.grid[y].length) {
-            x = 0;
+        this.focus();
+    }
+
+    focusPreviousItem(): void {
+        const row = this.grid[this.rovingRowIndex];
+        row.rovingItemIndex--;
+
+        if (row.rovingItemIndex < 0) {
+            row.rovingItemIndex = row.items.length - 1;
         }
 
-        this.focusedElement = new Coordinate(x, y);
+        this.focus();
+    }
 
-        let element = this.grid[y][x];
-        element?.item.focus();
+    focus(): void {
+        const row = this.grid[this.rovingRowIndex];
+        row.items[row.rovingItemIndex].item.focus();
     }
 }
 
-export class GridItem {
+class GridItem {
     item: HTMLElement;
 
     constructor(item: HTMLElement) {
@@ -67,12 +93,12 @@ export class GridItem {
     }
 }
 
-export class Coordinate {
-    x: number;
-    y: number;
+class GridRow {
+    items: GridItem[];
+    rovingItemIndex: number;
 
-    constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
+    constructor(items: GridItem[], rovingIndex = 0) {
+        this.items = items;
+        this.rovingItemIndex = rovingIndex;
     }
 }
