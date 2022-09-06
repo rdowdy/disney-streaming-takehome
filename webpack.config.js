@@ -12,13 +12,14 @@ module.exports = {
     publicPath: ''
   },
   devServer: {
-    port: 8080,
+    port: process.env.PORT || 8080,
     static: {
       directory: path.resolve(__dirname, './dist'),
     },
     devMiddleware: {
       writeToDisk: true
     },
+    allowedHosts: "all"
   },
   devtool: "inline-source-map",
   module: {

@@ -3,7 +3,6 @@ import {Container} from "./models/Container";
 import {ContentSet} from "./models/content-set/ContentSet";
 import {ContentItem} from "./models/content-item/ContentItem";
 import {CollectionGrid} from "./CollectionGrid";
-// import {rovingIndex} from "./utils/RovingIndex";
 
 export class HomePage {
     readonly rootEl: HTMLElement;
