@@ -34,11 +34,20 @@ ul.image-set {
 
     scroll-snap-type: inline mandatory;
     scroll-padding-inline: 20px;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+
+    /* Chrome, Safari, Opera */
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 ul.image-set li {
     padding: 0 10px;
     scroll-snap-align: start;
+    display: flex;
+    align-items: center;
 }
 
 .image-set li img {

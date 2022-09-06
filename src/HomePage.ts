@@ -5,6 +5,8 @@ import {ContentItem} from "./models/content-item/ContentItem";
 import {CollectionGrid} from "./CollectionGrid";
 
 export class HomePage {
+    readonly TILE_ASPECT_RATIO = 1.78;
+
     readonly rootEl: HTMLElement;
     readonly grid: CollectionGrid;
 
@@ -26,9 +28,11 @@ export class HomePage {
     }
 
     private appendContainerHeader(parentEl: HTMLElement, container: Container): void {
-        let header =  window.document.createElement("h1");
+        let headerSection = document.createElement("header");
+        let header =  document.createElement("h1");
         header.innerText = container.getHeaderText();
-        parentEl.appendChild(header);
+        headerSection.appendChild(header);
+        parentEl.appendChild(headerSection);
     }
 
     private appendContentSet(parentEl: HTMLElement, set: ContentSet, index: number): void {
@@ -44,9 +48,9 @@ export class HomePage {
 
     private appendContentItem(parentEl:HTMLElement, item: ContentItem, index: number) {
         let img = window.document.createElement("img");
-        img.src = item.getImageUrl("1.78");
+        img.src = item.getImageUrl(`${this.TILE_ASPECT_RATIO}`);
         img.tabIndex = 0;
-        img.onerror = () => img.src = "https://via.placeholder.com/500x281";
+        img.onerror = () => this.imageErrorHandler(img)
         img.setAttribute("loading", "lazy");
         parentEl.appendChild(img);
 
@@ -59,5 +63,10 @@ export class HomePage {
             throw Error("Document body is missing root element.");
         }
         return rootEl as HTMLElement;
+    }
+
+    private imageErrorHandler(img: HTMLImageElement): void {
+        img.src = "assets/mickey.svg";
+        img.height = img.width / this.TILE_ASPECT_RATIO;
     }
 }

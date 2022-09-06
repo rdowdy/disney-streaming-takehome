@@ -17,19 +17,19 @@ export class CollectionGrid {
     registerGridEventHandlers(): void {
         window.addEventListener("keydown", (ev: KeyboardEvent) => {
             switch(ev.key) {
-                case "ArrowDown":
+                case KeyCode.DOWN:
                     ev.preventDefault();
                     this.focusNextRow();
                     break;
-                case "ArrowUp":
+                case KeyCode.UP:
                     ev.preventDefault();
                     this.focusPreviousRow();
                     break;
-                case "ArrowLeft":
+                case KeyCode.LEFT:
                     ev.preventDefault();
                     this.focusPreviousItem();
                     break;
-                case "ArrowRight":
+                case KeyCode.RIGHT:
                     ev.preventDefault();
                     this.focusNextItem();
                     break;
@@ -101,4 +101,11 @@ class GridRow {
         this.items = items;
         this.rovingItemIndex = rovingIndex;
     }
+}
+
+const enum KeyCode {
+    UP = "ArrowUp",
+    DOWN = "ArrowDown",
+    LEFT = "ArrowLeft",
+    RIGHT = "ArrowRight"
 }
