@@ -3,6 +3,7 @@ import {Container} from "./models/Container";
 import {ContentSet} from "./models/content-set/ContentSet";
 import {ContentItem} from "./models/content-item/ContentItem";
 import {CollectionGrid} from "./CollectionGrid";
+import {DisneyMagic} from "./disney-magic/DisneyMagic";
 
 export class HomePage {
     readonly TILE_ASPECT_RATIO = 1.78;
@@ -10,13 +11,21 @@ export class HomePage {
     readonly rootEl: HTMLElement;
     readonly grid: CollectionGrid;
 
+    readonly disneyMagic: DisneyMagic;
+
     constructor() {
         this.rootEl = this.getRootElement();
         this.grid = new CollectionGrid();
+        this.disneyMagic = new DisneyMagic();
     }
 
     renderCollection(collection: StandardCollection): void {
         collection.containers.forEach((container, index) => {
+            if (container.set.getItems().length === 0) {
+                // TODO: Setup SetRefs for dynamic loading
+                return;
+            }
+
             let section = document.createElement("section");
             this.appendContainerHeader(section, container);
             this.appendContentSet(section, container.set, index);
@@ -30,7 +39,9 @@ export class HomePage {
     private appendContainerHeader(parentEl: HTMLElement, container: Container): void {
         let headerSection = document.createElement("header");
         let header =  document.createElement("h1");
-        header.innerText = container.getHeaderText();
+
+        header.innerHTML = this.disneyMagic.hideMickeyInText(container.getHeaderText());
+
         headerSection.appendChild(header);
         parentEl.appendChild(headerSection);
     }

@@ -22,6 +22,12 @@ h1 {
     font-size: 1.4em;
     color: $collection-header-color;
     margin: 0;
+
+    img.hidden-mickey {
+        width: 0.8em;
+        vertical-align: middle;
+        font-weight: bolder;
+    }
 }
 
 ul.image-set {
