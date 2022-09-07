@@ -1,6 +1,11 @@
 # Disney++ (Disney Streaming Take Home Assessment)
 
-## Description
+This is a small demo app created for the Disney Streaming team as part
+of a take-home coding assessment. The app pulls collection information from a BAM
+which it then uses to populate a "home page" media scroller, similar to Disney+, 
+or other such streaming apps.
+
+## Requirements
 
 - Create a page that consumes the home page API and renders the pre-populated data
 onto the screen.
@@ -10,57 +15,58 @@ up/down/left/right/enter/back/etc. Avoid mouse input.
 - Minimum layout should be multiple rows of data, but please feel free to add in your
 own design ideas as well!
 
-## Table of Contents
+## ✨ Disney Magic ✨
 
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
+**ALERT:** There is a 30% chance of magic in the forecast today.
+Be on the lookout for a hidden mickey on the page headers. You might
+have to refresh the page to find him!
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+Locally, the app can be run with:  
+`yarn install`  
+`yarn start`
 
-## Usage
+To build the app for distribution, run:   
+`yarn run build`
 
-Provide instructions and examples for use. Include screenshots as needed.
+## Deployment
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+The app is Dockerized and deployed on Heroku at
+https://disney-takehome.herokuapp.com/
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+## Areas In Need Of Improvement
 
-## Credits
+### Improve class hierarchy for models. 
+* Some of the models I created, like the different title classes under `src/models/title`, 
+could be reworked to take more advantage of inheritance or polymorphism. 
+It seems that they share some fields up until a
+certain point where they differ (`program`, `series`, `set`, `collection`).
+  
 
-List your collaborators, if any, with links to their GitHub profiles.
+### Add shared constants for type discriminators
+* The type discriminators used by `class-transformer` use strings to read
+the type field and decide which class to assign. These can be pulled up into
+shared constants so there aren't any magic strings. This makes the type values
+easy to change later on.
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
 
-If you followed tutorials, include links to those here as well.
+### Separate webpack files into common, dev, and prod
+*  The `webpack.config.js` file currently houses all the build configurations and
+is geared towards a dev workflow. A separate `webpack.prod.config.js` should be
+created which would optimize the build for production. A `webpack.dev.config.js` would
+do the same for dev. `webpack.common.config.js` would have the shared build configs. 
 
-## License
+### Set up app configuration infrastructure
+* App configuration values like API URLs should be stored in an environment-specific 
+configuration file.
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+### Add support to dynamically populate `SetRef` sets
+* Currently, the app only renders sets that we have already received data for
+from the API. It does not yet populate SetRef sets. In the interest of time, I
+left this extra credit out of the scope of this implementation.
 
----
-
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-## Badges
-
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
-## Features
-
-If your project has a lot of features, list them here.
-
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-## Tests
+### Add title text overlay to placeholder images on image not found
+* Currently, we just see a friendly Mickey when an image 404's, but 
+it would be much more helpful to the user if we also display the item's
+title so they know what movie/series/collection it's supposed to be.

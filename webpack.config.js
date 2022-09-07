@@ -19,7 +19,7 @@ module.exports = {
     devMiddleware: {
       writeToDisk: true
     },
-    allowedHosts: "all"
+    allowedHosts: "https://disney-takehome.herokuapp.com/"
   },
   devtool: "inline-source-map",
   module: {
