@@ -1,8 +1,8 @@
-import {StandardCollection} from "./models/collection/StandardCollection";
-import {Container} from "./models/Container";
-import {ContentSet} from "./models/content-set/ContentSet";
-import {ContentItem} from "./models/content-item/ContentItem";
-import {CollectionGrid} from "./CollectionGrid";
+import {StandardCollection} from "../models/collection/StandardCollection";
+import {Container} from "../models/Container";
+import {ContentSet} from "../models/content-set/ContentSet";
+import {ContentItem} from "../models/content-item/ContentItem";
+import {CollectionGrid} from "./collection-grid/CollectionGrid";
 import {DisneyMagic} from "./disney-magic/DisneyMagic";
 
 export class HomePage {
@@ -22,13 +22,14 @@ export class HomePage {
     renderCollection(collection: StandardCollection): void {
         collection.containers.forEach((container, index) => {
             if (container.set.getItems().length === 0) {
-                // TODO: Setup SetRefs for dynamic loading
                 return;
             }
 
             let section = document.createElement("section");
+
             this.appendContainerHeader(section, container);
             this.appendContentSet(section, container.set, index);
+
             this.rootEl.appendChild(section);
         });
 
@@ -40,7 +41,7 @@ export class HomePage {
         let headerSection = document.createElement("header");
         let header =  document.createElement("h1");
 
-        header.innerHTML = this.disneyMagic.hideMickeyInText(container.getHeaderText());
+        header.innerHTML = this.disneyMagic.hideHtmlMickeyInText(container.getHeaderText(), 'hidden-mickey');
 
         headerSection.appendChild(header);
         parentEl.appendChild(headerSection);
@@ -48,23 +49,28 @@ export class HomePage {
 
     private appendContentSet(parentEl: HTMLElement, set: ContentSet, index: number): void {
         let imageSetContainer = window.document.createElement("ul");
+
         set.getItems().forEach(item => {
             let li = document.createElement("li");
             this.appendContentItem(li, item, index);
             imageSetContainer.appendChild(li);
         });
+
         imageSetContainer.classList.add("image-set");
+
         parentEl.appendChild(imageSetContainer);
     }
 
     private appendContentItem(parentEl:HTMLElement, item: ContentItem, index: number) {
         let img = window.document.createElement("img");
-        img.src = item.getImageUrl(`${this.TILE_ASPECT_RATIO}`);
-        img.tabIndex = 0;
-        img.onerror = () => this.imageErrorHandler(img)
-        img.setAttribute("loading", "lazy");
-        parentEl.appendChild(img);
 
+        img.src = item.getImageUrl(`${this.TILE_ASPECT_RATIO}`);
+        img.alt = item.getItemTitle();
+        img.tabIndex = 0;
+        img.onerror = () => this.imageErrorHandler(img);
+        img.setAttribute("loading", "lazy");
+
+        parentEl.appendChild(img);
         this.grid.appendElementToRow(index, img);
     }
 

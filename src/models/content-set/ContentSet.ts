@@ -1,13 +1,13 @@
 import {Type} from "class-transformer";
-import {ContentText} from "../title/ContentText";
+import {SetTitleContent} from "../title/set/SetTitleContent";
 import {ContentItem} from "../content-item/ContentItem";
 
 export class ContentSet {
-    @Type(() => ContentText)
-    text: ContentText;
+    @Type(() => SetTitleContent)
+    text: SetTitleContent;
 
     constructor() {
-        this.text = new ContentText();
+        this.text = new SetTitleContent();
     }
 
     getItems(): ContentItem[] {

@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode: "development",
-  entry: './src/app.ts',
+  entry: './src/App.ts',
   output: {
     filename: 'bundle.[contenthash].js',
     path: path.resolve(__dirname, './dist'),

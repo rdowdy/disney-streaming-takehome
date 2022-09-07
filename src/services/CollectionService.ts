@@ -1,6 +1,6 @@
 import axios from "axios";
 import {plainToInstance} from "class-transformer";
-import {StandardCollection} from "./models/collection/StandardCollection";
+import {StandardCollection} from "../models/collection/StandardCollection";
 
 export class CollectionService {
     readonly CollectionApiBaseUrl: string = 'https://cd-static.bamgrid.com/dp-117731241344';

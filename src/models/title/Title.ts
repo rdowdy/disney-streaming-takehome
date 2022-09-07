@@ -1,7 +1,7 @@
 import {Type} from "class-transformer";
 import {TitleContent} from "./TitleContent";
 
-export class TitleSet {
+export class Title {
     @Type(() => TitleContent)
     default: TitleContent;
 
