@@ -18,19 +18,19 @@ export class CollectionService {
 
     async getSetByRefId(refId: string): Promise<ContentItem[]> {
         let apiUrl = `${this.CollectionApiBaseUrl}/sets/${refId}.json`;
-        return axios.get(apiUrl).then(res => {
-            console.log(res.data.data);
+        return axios.get(apiUrl).then(res => this.getContentItemsFromJson(res.data.data));
+    }
 
-            if (res.data.data.CuratedSet) {
-                return plainToInstance(CuratedSet, res.data.data.CuratedSet).items;
-            } else if (res.data.data.TrendingSet) {
-                return plainToInstance(TrendingSet, res.data.data.TrendingSet).items;
-            } else if (res.data.data.PersonalizedCuratedSet) {
-                return plainToInstance(PersonalizedCuratedSet, res.data.data.PersonalizedCuratedSet).items;
-            } else {
-                return [];
-            }
-        });
+    private getContentItemsFromJson(json: any): ContentItem[] {
+        if (json.CuratedSet) {
+            return plainToInstance(CuratedSet, json.CuratedSet).items;
+        } else if (json.TrendingSet) {
+            return plainToInstance(TrendingSet, json.TrendingSet).items;
+        } else if (json.PersonalizedCuratedSet) {
+            return plainToInstance(PersonalizedCuratedSet, json.PersonalizedCuratedSet).items;
+        } else {
+            return [];
+        }
     }
 }
 
