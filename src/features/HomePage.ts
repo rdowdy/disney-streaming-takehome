@@ -21,6 +21,7 @@ export class HomePage {
     }
 
     async renderCollection(collection: StandardCollection): Promise<void> {
+        document.body.scrollTo({left: 0, top: 0});
         await this.populateRefSets(collection);
 
         collection.containers.forEach((container, index) => {
