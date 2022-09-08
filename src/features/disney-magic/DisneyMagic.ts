@@ -1,6 +1,6 @@
 export class DisneyMagic {
     NUM_MICKEYS_TO_HIDE = 1;
-    CHANCE_OF_MICKEY = .3;
+    CHANCE_OF_MICKEY = .15;
 
     hideHtmlMickeyInText(text: string, hiddenMickeyCssClass: string): string {
         if (this.NUM_MICKEYS_TO_HIDE <= 0) {

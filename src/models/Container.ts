@@ -1,7 +1,7 @@
 import {Type} from "class-transformer";
 import {SetRef} from "./content-set/SetRef";
 import {CuratedSet} from "./content-set/CuratedSet";
-import {ContentSet} from "./content-set/ContentSet";
+import {ContentSet, EmptyContentSet} from "./content-set/ContentSet";
 
 export class Container {
     @Type(() => ContentSet, {
@@ -16,7 +16,7 @@ export class Container {
     set: ContentSet;
 
     constructor() {
-        this.set = new ContentSet();
+        this.set = new EmptyContentSet();
     }
 
     getHeaderText(): string {

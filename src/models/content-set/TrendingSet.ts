@@ -1,27 +1,28 @@
-import {Type} from "class-transformer";
 import {ContentSet} from "./ContentSet";
-import {ContentItem} from "../content-item/ContentItem";
 import {SetTitleContent} from "../title/set/SetTitleContent";
+import {Type} from "class-transformer";
+import {ContentItem} from "../content-item/ContentItem";
 import {ClassDiscriminators} from "../../shared/ClassDiscriminators";
 
-export class CuratedSet extends ContentSet {
-    @Type(() => ContentItem, ClassDiscriminators.ContentItems)
-    items: ContentItem[];
-
+export class TrendingSet extends ContentSet {
     @Type(() => SetTitleContent)
     text: SetTitleContent;
 
+    @Type(() => ContentItem, ClassDiscriminators.ContentItems)
+    items: ContentItem[];
+
     constructor() {
         super();
-        this.items = [];
         this.text = new SetTitleContent();
+        this.items = [];
     }
 
     getItems(): ContentItem[] {
-        return this.items;
+        return [];
     }
 
     isRef(): boolean {
         return false;
     }
+
 }

@@ -4,6 +4,7 @@ import {ContentSet} from "../models/content-set/ContentSet";
 import {ContentItem} from "../models/content-item/ContentItem";
 import {CollectionGrid} from "./collection-grid/CollectionGrid";
 import {DisneyMagic} from "./disney-magic/DisneyMagic";
+import {SetRef} from "../models/content-set/SetRef";
 
 export class HomePage {
     readonly TILE_ASPECT_RATIO = 1.78;
@@ -19,12 +20,10 @@ export class HomePage {
         this.disneyMagic = new DisneyMagic();
     }
 
-    renderCollection(collection: StandardCollection): void {
-        collection.containers.forEach((container, index) => {
-            if (container.set.getItems().length === 0) {
-                return;
-            }
+    async renderCollection(collection: StandardCollection): Promise<void> {
+        await this.populateRefSets(collection);
 
+        collection.containers.forEach((container, index) => {
             let section = document.createElement("section");
 
             this.appendContainerHeader(section, container);
@@ -35,6 +34,16 @@ export class HomePage {
 
         this.grid.registerGridEventHandlers();
         this.grid.focus();
+    }
+
+    async populateRefSets(collection: StandardCollection): Promise<void> {
+        for (const container of collection.containers) {
+            if (container.set.isRef()) {
+                const setRef = container.set as SetRef;
+                const results = await setRef.getItemsAsync()
+                setRef.setItems(results);
+            }
+        }
     }
 
     private appendContainerHeader(parentEl: HTMLElement, container: Container): void {

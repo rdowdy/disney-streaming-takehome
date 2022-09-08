@@ -17,7 +17,7 @@ own design ideas as well!
 
 ## ✨ Disney Magic ✨
 
-**ALERT:** There is a 30% chance of magic in the forecast today.
+**ALERT:** There is a 15% chance of magic in the forecast today.
 Be on the lookout for a hidden mickey on the page headers. You might
 have to refresh the page to find him!
 
@@ -70,3 +70,8 @@ left this extra credit out of the scope of this implementation.
 * Currently, we just see a friendly Mickey when an image 404's, but 
 it would be much more helpful to the user if we also display the item's
 title so they know what movie/series/collection it's supposed to be.
+
+### Add dependency injection
+* The classes in this project currently know how to instantiate dependencies
+such as `CollectionService`. It is best practice to follow inversion of control. 
+A dependency injection framework would achieve this.
