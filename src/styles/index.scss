@@ -69,12 +69,16 @@ ul.image-set {
     }
 }
 
-@media (prefers-reduced-motion) {
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: unset;
+    }
+
     ul.image-set {
         scroll-behavior: unset;
     }
 
-    .image-set li img:focus {
-        transform: none;
+    ul.image-set li img {
+        transition: none;
     }
 }

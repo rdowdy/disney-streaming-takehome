@@ -61,10 +61,10 @@ do the same for dev. `webpack.common.config.js` would have the shared build conf
 * App configuration values like API URLs should be stored in an environment-specific 
 configuration file.
 
-### Add support to dynamically populate `SetRef` sets
-* Currently, the app only renders sets that we have already received data for
-from the API. It does not yet populate SetRef sets. In the interest of time, I
-left this extra credit out of the scope of this implementation.
+### Add support to dynamically populated `SetRef` sets
+* Currently, the set renders set refs, but it loads them all on page load. 
+Support still needs to be added for dynamically loading them as they scroll
+into view.
 
 ### Add title text overlay to placeholder images on image not found
 * Currently, we just see a friendly Mickey when an image 404's, but 
