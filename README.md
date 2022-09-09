@@ -5,6 +5,8 @@ of a take-home coding assessment. The app pulls collection information from a BA
 which it then uses to populate a "home page" media scroller, similar to Disney+, 
 or other such streaming apps.
 
+![Screenshot of homepage](assets/homepage-screenshot.png)
+
 ## Requirements
 
 - Create a page that consumes the home page API and renders the pre-populated data
