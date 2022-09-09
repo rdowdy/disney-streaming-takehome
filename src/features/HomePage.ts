@@ -8,6 +8,7 @@ import {SetRef} from "../models/content-set/SetRef";
 
 export class HomePage {
     readonly TILE_ASPECT_RATIO = 1.78;
+    readonly IMAGE_NOT_FOUND_FILEPATH = 'assets/mickey.svg';
 
     readonly rootEl: HTMLElement;
     readonly grid: CollectionGrid;
@@ -22,16 +23,9 @@ export class HomePage {
 
     async renderCollection(collection: StandardCollection): Promise<void> {
         document.body.scrollTo({left: 0, top: 0});
+
         await this.populateRefSets(collection);
-
-        collection.containers.forEach((container, index) => {
-            let section = document.createElement("section");
-
-            this.appendContainerHeader(section, container);
-            this.appendContentSet(section, container.set, index);
-
-            this.rootEl.appendChild(section);
-        });
+        this.populateSets(collection);
 
         this.grid.registerGridEventHandlers();
         this.grid.focus();
@@ -45,6 +39,17 @@ export class HomePage {
                 setRef.setItems(results);
             }
         }
+    }
+
+    populateSets(collection: StandardCollection): void {
+        collection.containers.forEach((container, index) => {
+            let section = document.createElement("section");
+
+            this.appendContainerHeader(section, container);
+            this.appendContentSet(section, container.set, index);
+
+            this.rootEl.appendChild(section);
+        });
     }
 
     private appendContainerHeader(parentEl: HTMLElement, container: Container): void {
@@ -93,7 +98,7 @@ export class HomePage {
     }
 
     private imageErrorHandler(img: HTMLImageElement): void {
-        img.src = "assets/mickey.svg";
+        img.src = this.IMAGE_NOT_FOUND_FILEPATH;
         img.height = img.width / this.TILE_ASPECT_RATIO;
     }
 }
