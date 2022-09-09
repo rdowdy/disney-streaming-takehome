@@ -1,18 +1,9 @@
 import {Type} from "class-transformer";
-import {SetRef} from "./content-set/SetRef";
-import {CuratedSet} from "./content-set/CuratedSet";
 import {ContentSet, EmptyContentSet} from "./content-set/ContentSet";
+import {ClassDiscriminators} from "../shared/ClassDiscriminators";
 
 export class Container {
-    @Type(() => ContentSet, {
-        discriminator: {
-            property: 'type',
-            subTypes: [
-                {value: CuratedSet, name: 'CuratedSet'},
-                {value: SetRef, name: 'SetRef'}
-            ]
-        }
-    })
+    @Type(() => ContentSet, ClassDiscriminators.ContentSet)
     set: ContentSet;
 
     constructor() {

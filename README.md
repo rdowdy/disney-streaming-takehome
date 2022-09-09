@@ -37,6 +37,13 @@ https://disney-takehome.herokuapp.com/
 
 ## Areas In Need Of Improvement
 
+### Add unit tests
+* There are currently no unit tests. I made the decision not to include
+unit tests for this because I knew that the project would already consume a large 
+portion of my nights and weekends, and I wanted to limit the scope of time. 
+If given more time, I consider unit tests to be part of the Definition of Done, 
+and would employ TDD to develop a project/feature/bug.
+
 ### Improve class hierarchy for models. 
 * Some of the models I created, like the different title classes under `src/models/title`, 
 could be reworked to take more advantage of inheritance or polymorphism. 
@@ -62,7 +69,7 @@ do the same for dev. `webpack.common.config.js` would have the shared build conf
 configuration file.
 
 ### Add support to dynamically populated `SetRef` sets
-* Currently, the set renders set refs, but it loads them all on page load. 
+* Currently, the set renders set refs, but it populates them all on page load. 
 Support still needs to be added for dynamically loading them as they scroll
 into view.
 
@@ -75,3 +82,7 @@ title so they know what movie/series/collection it's supposed to be.
 * The classes in this project currently know how to instantiate dependencies
 such as `CollectionService`. It is best practice to follow inversion of control. 
 A dependency injection framework would achieve this.
+
+### Set up a proper backend
+* The app is currently served up by `webpack-dev-server` which is not 
+a sustainable or safe option for serving the app in production.

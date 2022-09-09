@@ -7,7 +7,7 @@ import {HomePage} from "./features/HomePage";
 export class App {
     async StartUp(): Promise<void> {
         const result = await new CollectionService().getCollectionByName('home');
-        new HomePage().renderCollection(result);
+        await new HomePage().renderCollection(result);
     }
 }
 
