@@ -2,10 +2,10 @@ import {Type} from "class-transformer";
 import {ContentSet} from "./ContentSet";
 import {ContentItem} from "../content-item/ContentItem";
 import {SetTitleContent} from "../title/set/SetTitleContent";
-import {ClassDiscriminators} from "../../shared/ClassDiscriminators";
+import {ContentItemsDiscriminator} from "../../shared/ContentItemsDiscriminator";
 
 export class CuratedSet extends ContentSet {
-    @Type(() => ContentItem, ClassDiscriminators.ContentItems)
+    @Type(() => ContentItem, ContentItemsDiscriminator)
     items: ContentItem[];
 
     @Type(() => SetTitleContent)

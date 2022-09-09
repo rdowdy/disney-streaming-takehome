@@ -1,9 +1,9 @@
 import {Type} from "class-transformer";
 import {ContentSet, EmptyContentSet} from "./content-set/ContentSet";
-import {ClassDiscriminators} from "../shared/ClassDiscriminators";
+import {ContentSetDiscriminator} from "../shared/ContentSetDiscriminator";
 
 export class Container {
-    @Type(() => ContentSet, ClassDiscriminators.ContentSet)
+    @Type(() => ContentSet, ContentSetDiscriminator)
     set: ContentSet;
 
     constructor() {
