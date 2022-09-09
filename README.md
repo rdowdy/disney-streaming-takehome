@@ -63,7 +63,7 @@ do the same for dev. `webpack.common.config.js` would have the shared build conf
 * App configuration values like API URLs should be stored in an environment-specific 
 configuration file.
 
-### Add support to dynamically populated `SetRef` sets
+### Add support to dynamically populate `SetRef` sets
 * Currently, the set renders set refs, but it populates them all on page load. 
 Support still needs to be added for dynamically loading them as they scroll
 into view.
