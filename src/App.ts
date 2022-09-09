@@ -1,4 +1,4 @@
-import './styles/index.scss';
+import './assets/styles/index.scss';
 import 'reflect-metadata';
 
 import {CollectionService} from './services/CollectionService'

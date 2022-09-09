@@ -41,14 +41,14 @@ module.exports = {
           { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       },
-      { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'asset/resource' },
+      { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'asset/resource' }
     ]
   },
   resolve: {
     modules: ['./src', 'node_modules'],
     extensions: ['.ts', '.js'],
     alias: {
-      assets: './src/images',
+      assets: './src/assets/images'
     },
   },
   plugins: [
@@ -56,7 +56,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: './src/images',
+          from: './src/assets/images',
           to: 'assets',
           globOptions: {
             ignore: ['*.DS_Store'],
