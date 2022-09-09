@@ -51,13 +51,6 @@ and would employ TDD to develop a project/feature/bug.
 could be reworked to take more advantage of inheritance or polymorphism. 
 It seems that they share some fields up until a
 certain point where they differ (`program`, `series`, `set`, `collection`).
-  
-
-### Add shared constants for type discriminators
-* The type discriminators used by `class-transformer` use strings to read
-the type field and decide which class to assign. These can be pulled up into
-shared constants so there aren't any magic strings. This makes the type values
-easy to change later on.
 
 
 ### Separate webpack files into common, dev, and prod
@@ -83,8 +76,9 @@ title so they know what movie/series/collection it's supposed to be.
 ### Add dependency injection
 * The classes in this project currently know how to instantiate dependencies
 such as `CollectionService`. It is best practice to follow inversion of control. 
-A dependency injection framework would achieve this.
+A dependency injection framework would achieve this. Dependency injection is also
+critical to isolating classes when unit testing them.
 
 ### Set up a proper backend
 * The app is currently served up by `webpack-dev-server` which is not 
-a sustainable or safe option for serving the app in production.
+a sustainable or secure option for serving the app in a real production scenario.
